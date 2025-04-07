@@ -1,10 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
+
+// Define interface for track data
+interface Track {
+  trackId: number;
+  trackName: string;
+  artistName: string;
+  collectionName: string;
+  trackViewUrl: string;
+  artworkUrl100?: string;
+}
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<Track[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const searchAppleMusic = async (query: string) => {
@@ -54,17 +65,22 @@ export default function Home() {
         </form>
 
         <div className="space-y-4">
-          {searchResults.map((track: any) => (
+          {searchResults.map((track: Track) => (
             <div
               key={track.trackId}
               className="p-4 bg-gray-700 rounded-lg flex items-center gap-4"
             >
               {track.artworkUrl100 && (
-                <img
-                  src={track.artworkUrl100}
-                  alt={track.trackName}
-                  className="w-16 h-16 rounded-md"
-                />
+                <div className="relative w-16 h-16">
+                  <Image
+                    src={track.artworkUrl100}
+                    alt={track.trackName}
+                    fill
+                    sizes="64px"
+                    style={{objectFit: 'cover'}}
+                    className="rounded-md"
+                  />
+                </div>
               )}
               <div>
                 <h2 className="text-xl font-semibold text-white">{track.trackName}</h2>
