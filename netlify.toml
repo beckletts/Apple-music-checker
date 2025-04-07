@@ -5,6 +5,9 @@
 [build.environment]
   NODE_VERSION = "18"
   NPM_VERSION = "9"
+  # Explicitly disable Go-related settings
+  GO_VERSION = ""
+  GO_IMPORT_PATH = ""
 
 [[plugins]]
   package = "@netlify/plugin-nextjs" 

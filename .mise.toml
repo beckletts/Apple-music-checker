@@ -1,0 +1,7 @@
+[tools]
+# This project doesn't use Go, explicitly set an empty config
+go = { version = "" }
+
+[env]
+# Use Node.js instead
+NODE_VERSION = "18" 
